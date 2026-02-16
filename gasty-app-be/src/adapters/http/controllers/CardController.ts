@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { CreateCardUseCase } from '@application/use-cases/CreateCardUseCase';
-import { GetCardsUseCase } from '@application/use-cases/GetCardsUseCase';
-import { GetCardByIdUseCase } from '@application/use-cases/GetCardByIdUseCase';
-import { GetCardsByBankIdUseCase } from '@application/use-cases/GetCardsByBankIdUseCase';
+import { CreateCardUseCase } from '@application/use-cases/cards/CreateCardUseCase';
+import { GetCardsUseCase } from '@application/use-cases/cards/GetCardsUseCase';
+import { GetCardByIdUseCase } from '@application/use-cases/cards/GetCardByIdUseCase';
+import { GetCardsByBankIdUseCase } from '@application/use-cases/cards/GetCardsByBankIdUseCase';
 
 /**
  * Controlador HTTP para tarjetas
@@ -19,11 +19,11 @@ export class CardController {
 
   async create(req: Request, res: Response): Promise<void> {
     try {
-      const { bankId, name, type, lastFourDigits, color } = req.body;
+      const { bankId, name, type, lastFourDigits, color, style } = req.body;
 
-      if (!bankId || !name || !type || !lastFourDigits || !color) {
+      if (!bankId || !name || !type || !color || !style) {
         res.status(400).json({
-          error: 'Faltan campos requeridos: bankId, name, type, lastFourDigits, color',
+          error: 'Faltan campos requeridos: bankId, name, type, color, style',
         });
         return;
       }
@@ -35,19 +35,13 @@ export class CardController {
         return;
       }
 
-      if (!/^\d{4}$/.test(lastFourDigits)) {
-        res.status(400).json({
-          error: 'Los últimos 4 dígitos deben ser numéricos y tener exactamente 4 caracteres',
-        });
-        return;
-      }
-
       const card = await this.createCardUseCase.execute(
         bankId,
         name,
         type,
-        lastFourDigits,
-        color
+        lastFourDigits || '',
+        color,
+        style
       );
 
       res.status(201).json(card);
