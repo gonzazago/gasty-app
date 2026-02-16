@@ -14,6 +14,7 @@ export class MongoCardRepository implements ICardRepository {
       document.type,
       document.lastFourDigits,
       document.color,
+      document.style,
       document.createdAt,
       document.updatedAt
     );
@@ -27,6 +28,7 @@ export class MongoCardRepository implements ICardRepository {
       type: card.type,
       lastFourDigits: card.lastFourDigits,
       color: card.color,
+      style: card.style,
     };
   }
 
@@ -46,9 +48,20 @@ export class MongoCardRepository implements ICardRepository {
   }
 
   async save(card: Card): Promise<Card> {
-    const document = new CardModel(this.mapToDocument(card));
+    const documentData = {
+      id: card.id,
+      bankId: card.bankId,
+      name: card.name,
+      type: card.type,
+      lastFourDigits: card.lastFourDigits,
+      color: card.color,
+      style: card.style,
+      createdAt: card.createdAt,
+      updatedAt: card.updatedAt
+    };
+    const document = new CardModel(documentData);
     await document.save();
-    return this.mapToDomain(document);
+    return this.mapToDomain(document.toObject() as ICardDocument);
   }
 
   async update(card: Card): Promise<Card> {

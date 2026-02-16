@@ -10,6 +10,7 @@ export interface ICardDocument extends Document {
   type: 'visa' | 'mastercard' | 'amex' | 'other';
   lastFourDigits: string;
   color: string;
+  style: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,8 +28,9 @@ const CardSchema = new Schema<ICardDocument>(
       enum: ['visa', 'mastercard', 'amex', 'other'],
       required: true,
     },
-    lastFourDigits: { type: String, required: true, match: /^\d{4}$/ },
+    lastFourDigits: { type: String, required: false },
     color: { type: String, required: true },
+    style: { type: String, required: true },
   },
   {
     timestamps: true,
