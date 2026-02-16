@@ -12,13 +12,14 @@ export class CreateCardUseCase {
     name: string,
     type: 'visa' | 'mastercard' | 'amex' | 'other',
     lastFourDigits: string,
-    color: string
+    color: string,
+    style: string
   ): Promise<Card> {
     // Generar ID
     const id = `card-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     // Crear la entidad de dominio
-    const card = new Card(id, bankId, name, type, lastFourDigits, color);
+    const card = new Card(id, bankId, name, type, lastFourDigits, color, style);
 
     // Validar la entidad
     if (!card.isValid()) {
