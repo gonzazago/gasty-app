@@ -10,6 +10,7 @@ export class Card extends BaseEntity {
   type: 'visa' | 'mastercard' | 'amex' | 'other';
   lastFourDigits: string;
   color: string;
+  style: string;
 
   constructor(
     id: string,
@@ -18,6 +19,7 @@ export class Card extends BaseEntity {
     type: 'visa' | 'mastercard' | 'amex' | 'other',
     lastFourDigits: string,
     color: string,
+    style: string,
     createdAt?: Date,
     updatedAt?: Date
   ) {
@@ -27,6 +29,7 @@ export class Card extends BaseEntity {
     this.type = type;
     this.lastFourDigits = lastFourDigits;
     this.color = color;
+    this.style = style;
   }
 
   /**
@@ -35,9 +38,7 @@ export class Card extends BaseEntity {
   isValid(): boolean {
     return (
       this.bankId.trim().length > 0 &&
-      this.name.trim().length > 0 &&
-      this.lastFourDigits.trim().length === 4 &&
-      /^\d{4}$/.test(this.lastFourDigits)
+      this.name.trim().length > 0
     );
   }
 }
