@@ -2,7 +2,7 @@
 
 ## Phase 1: Identify and Fix Typing Issues
 
-- [ ] Task: **Identify Files with `any` Type**
+- [~] Task: **Identify Files with `any` Type**
     - [ ] Sub-task: Run the linter across the `gasty-app-fe` codebase to identify all files that have "unexpected any" errors.
     - [ ] Sub-task: Create a list of the files that need to be fixed.
 - [ ] Task: **Fix `any` Types**
