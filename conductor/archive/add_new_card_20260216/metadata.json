@@ -1,0 +1,8 @@
+{
+"track_id": "add_new_card_20260216",
+"type": "feature",
+"status": "new",
+"created_at": "2026-02-16T12:00:00Z",
+"updated_at": "2026-02-16T12:00:00Z",
+"description": "Agregar una nueva tarjeta a un banco existente y poder visualizarla desde todos los componentes, detalle, nuevo gasto y en las tablas que figure en la columna tarjeta/banco, no es necesario que el usuario carge los 4 ultimos numeros"
+}
